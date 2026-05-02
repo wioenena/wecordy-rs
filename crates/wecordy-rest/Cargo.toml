@@ -10,3 +10,5 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+reqwest = { workspace = true }
+thiserror = { workspace = true }
