@@ -8,4 +8,7 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-reqwest = { workspace = true }
+http = { workspace = true }
+
+[features]
+default = []
