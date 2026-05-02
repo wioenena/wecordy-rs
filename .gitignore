@@ -1,0 +1,9 @@
+# Directories
+/target
+wecordy-test/
+/.idea
+
+# Files
+.env
+.envrc
+/Cargo.lock
