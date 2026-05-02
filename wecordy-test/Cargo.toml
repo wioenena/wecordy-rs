@@ -7,7 +7,7 @@ edition = "2024"
 
 [dependencies]
 wecordy-rest = { path = "../crates/wecordy-rest" }
-wecordy-api = { path = "../crates/wecordy-api", features = ["reqwest"] }
+wecordy-api = { path = "../crates/wecordy-api", features = ["macros"] }
 
 tokio = { version = "1.52.1", features = ["full"] }
 anyhow = "1.0.102"
