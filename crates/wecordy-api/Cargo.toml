@@ -12,3 +12,4 @@ http = { workspace = true }
 
 [features]
 default = []
+macros = []
