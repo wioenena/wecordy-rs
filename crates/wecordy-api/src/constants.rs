@@ -1,1 +1,1 @@
-pub const API_URL: &str = "https://gateway.wecordy.com/api";
+pub const API_URL: &str = "https://gateway.wecordy.com/api/v1";
