@@ -1,9 +1,10 @@
 use serde::Deserialize;
 
 #[derive(Debug, Clone, Copy, Deserialize)]
+#[serde(rename_all(deserialize = "lowercase"))]
 pub enum UserStatus {
     Available,
     Busy,
     Afk,
     Offline,
-} // TODO: implement methods for creating from and converting to a string.
+}
