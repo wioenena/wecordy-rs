@@ -1,20 +1,24 @@
 [workspace]
 resolver = "2"
-members = [
-    "crates/wecordy-api",
-    "crates/wecordy-rest",
-    "crates/wecordy-ws"
-]
+members = ["crates/wecordy-api", "crates/wecordy-rest", "crates/wecordy-ws"]
 
 [workspace.package]
 edition = "2024"
+rust-version = "1.93.0"
 homepage = "https://github.com/wioenena/wecordy-rs"
 repository = "https://github.com/wioenena/wecordy-rs"
 license = "Apache-2.0"
-rust-version = "1.93.0"
 
 [workspace.dependencies]
-serde = { version = "1.0.228", features = ["derive"] }
+wecordy-api = { path = "crates/wecordy-api" }
+
 http = { version = "1.4.0", default-features = false, features = ["std"] }
-reqwest = { version = "0.13.3", default-features = false, features = ["rustls", "json"] }
+reqwest = { version = "0.13.3", default-features = false, features = [
+    "json",
+    "rustls"
+] }
+serde = { version = "1.0.228", features = ["derive", "std"] }
 thiserror = { version = "2.0.18", default-features = false, features = ["std"] }
+tokio = { version = "1.52.2", features = ["macros", "net", "time"] }
+url = { version = "2.5.8", default-features = false, features = ["std"] }
+tracing = "0.1.44"
