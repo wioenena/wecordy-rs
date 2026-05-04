@@ -1,7 +1,6 @@
 use serde::Deserialize;
 
 mod status;
-
 pub use status::UserStatus;
 
 #[derive(Debug, Deserialize)]

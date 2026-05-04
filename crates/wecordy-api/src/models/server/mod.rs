@@ -1,6 +1,9 @@
+use serde::Deserialize;
+
 pub mod application;
 pub mod invite;
 
+#[derive(Debug, Deserialize)]
 pub struct Server {
     pub(crate) id: String,
     pub(crate) name: String,

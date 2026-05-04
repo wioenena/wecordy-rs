@@ -3,7 +3,6 @@ use serde::Deserialize;
 mod option;
 mod option_choice;
 mod option_choice_value;
-
 pub use option::ApplicationCommandOption;
 pub use option_choice::ApplicationCommandOptionChoice;
 pub use option_choice_value::ApplicationCommandOptionChoiceValue;

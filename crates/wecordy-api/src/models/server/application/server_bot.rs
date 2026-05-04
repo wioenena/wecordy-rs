@@ -1,3 +1,6 @@
+use serde::Deserialize;
+
+#[derive(Debug, Deserialize)]
 pub struct ServerBot {
     pub(crate) id: String,
     pub(crate) application_id: String,

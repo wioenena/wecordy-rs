@@ -2,7 +2,6 @@ use serde::Deserialize;
 
 mod channel_type;
 mod permission_override;
-
 pub use channel_type::ChannelType;
 pub use permission_override::ChannelPermissionOverride;
 

@@ -2,7 +2,6 @@ use serde::Deserialize;
 
 mod attachment;
 mod reaction;
-
 pub use attachment::MessageAttachment;
 pub use reaction::MessageReaction;
 

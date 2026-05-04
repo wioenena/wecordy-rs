@@ -1,3 +1,6 @@
+use serde::Deserialize;
+
+#[derive(Debug, Deserialize)]
 pub struct ServerInvite {
     pub(crate) id: String,
     pub(crate) server_id: String,

@@ -1,7 +1,9 @@
-mod change;
+use serde::Deserialize;
 
+mod change;
 pub use change::AuditLogChange;
 
+#[derive(Debug, Deserialize)]
 pub struct AuditLog {
     pub(crate) id: String,
     pub(crate) server_id: String,

@@ -3,7 +3,6 @@ use serde::Deserialize;
 mod data;
 mod option;
 mod option_value;
-
 pub use data::InteractionData;
 pub use option::InteractionOption;
 pub use option_value::InteractionOptionValue;
