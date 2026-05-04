@@ -14,11 +14,17 @@ wecordy-api = { path = "crates/wecordy-api" }
 
 http = { version = "1.4.0", default-features = false, features = ["std"] }
 reqwest = { version = "0.13.3", default-features = false, features = [
-    "json",
-    "rustls"
+  "json",
+  "rustls"
 ] }
 serde = { version = "1.0.228", features = ["derive", "std"] }
 thiserror = { version = "2.0.18", default-features = false, features = ["std"] }
 tokio = { version = "1.52.2", features = ["macros", "net", "time"] }
-url = { version = "2.5.8", default-features = false, features = ["std"] }
 tracing = "0.1.44"
+url = { version = "2.5.8", default-features = false, features = ["std"] }
+
+[profile.dev]
+debug = "full"
+
+[profile.release]
+debug = "none"
