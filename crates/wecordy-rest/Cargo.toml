@@ -1,14 +1,20 @@
 [package]
 name = "wecordy-rest"
 version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
 description = "REST implementation for wecordy"
 readme = "README.md"
-edition.workspace = true
 homepage.workspace = true
 repository.workspace = true
 license.workspace = true
-rust-version.workspace = true
 
 [dependencies]
-reqwest = { workspace = true }
-thiserror = { workspace = true }
+wecordy-api.workspace = true
+
+reqwest.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+url.workspace = true
