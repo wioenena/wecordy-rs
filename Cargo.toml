@@ -14,6 +14,7 @@ license = "Apache-2.0"
 rust-version = "1.93.0"
 
 [workspace.dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
 http = { version = "1.4.0", default-features = false, features = ["std"] }
 reqwest = { version = "0.13.3", default-features = false, features = ["rustls", "json"] }
 thiserror = { version = "2.0.18", default-features = false, features = ["std"] }
