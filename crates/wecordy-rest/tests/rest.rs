@@ -1,16 +1,10 @@
-use std::{sync::OnceLock, time::Duration};
-
 use serde_json::json;
+use std::time::Duration;
 use wecordy_api::{
-    models::{
-        ApiResponse,
-        channel::Channel,
-        message::{self, Message},
-        user::User,
-    },
+    models::{ApiResponse, channel::Channel, message::Message, user::User},
     routes,
 };
-use wecordy_rest::{Client, ClientBuilder, Error, Result};
+use wecordy_rest::{Client, ClientBuilder, Result};
 
 fn create_rest_client() -> Client {
     let token = std::env::var("WECORDY_TOKEN").unwrap();
