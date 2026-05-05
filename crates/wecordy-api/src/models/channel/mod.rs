@@ -10,6 +10,7 @@ pub struct Channel {
     pub(crate) id: String,
     pub(crate) name: String,
     pub(crate) topic: Option<String>,
+    #[serde(rename = "type")]
     pub(crate) channel_type: ChannelType,
     pub(crate) server_id: String,
     pub(crate) parent_id: Option<String>,
