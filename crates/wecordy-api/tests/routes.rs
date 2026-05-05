@@ -132,10 +132,7 @@ fn test_channel_routes() {
         update_channel_by_id(1),
         create_test_route!(PATCH, "/channel/1")
     );
-    assert_eq!(
-        delete_channel_by_id(1),
-        create_test_route!(DELETE, "/channel/1")
-    );
+    assert_eq!(delete_channel(), create_test_route!(DELETE, "/channel"));
     assert_eq!(
         join_voice_channel(),
         create_test_route!(POST, "/channel/join")
