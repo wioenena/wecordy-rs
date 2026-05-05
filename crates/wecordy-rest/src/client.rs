@@ -1,7 +1,7 @@
 use super::{Error, Result};
 use reqwest::{Method, Response, StatusCode};
-use serde::de::DeserializeOwned;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use std::sync::Arc;
 use std::time::Duration;
 use tracing::debug;
