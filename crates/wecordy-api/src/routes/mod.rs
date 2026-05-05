@@ -144,7 +144,7 @@ define_route!(GET, get_server_channels, "/channel/{}/channels", server_id);
 define_route!(POST, create_channel, "/channel");
 define_route!(GET, get_channel_by_id, "/channel/{}", channel_id);
 define_route!(PATCH, update_channel_by_id, "/channel/{}", channel_id);
-define_route!(DELETE, delete_channel_by_id, "/channel/{}", channel_id);
+define_route!(DELETE, delete_channel, "/channel");
 define_route!(POST, join_voice_channel, "/channel/join");
 define_route!(POST, disconnect_voice_channel, "/channel/disconnect");
 define_route!(POST, add_tracks_to_voice_channel, "/channel/add-tracks");
