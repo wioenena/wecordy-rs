@@ -1,14 +1,61 @@
-use serde::Deserialize;
+use std::fmt;
+
+use super::user::User;
+use serde::{
+    Deserialize,
+    de::{Visitor, value::MapAccessDeserializer},
+};
 
 mod attachment;
 mod reaction;
 pub use attachment::MessageAttachment;
 pub use reaction::MessageReaction;
 
+#[derive(Debug)]
+pub enum MessageUserId {
+    Id(String),
+    User(Box<User>),
+}
+
+struct MessageUserIdVisitor;
+
+impl<'de> Visitor<'de> for MessageUserIdVisitor {
+    type Value = MessageUserId;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("a string or a user object")
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: serde::de::Error,
+    {
+        Ok(MessageUserId::Id(value.to_string()))
+    }
+
+    fn visit_map<A>(self, map: A) -> Result<Self::Value, A::Error>
+    where
+        A: serde::de::MapAccess<'de>,
+    {
+        let user = User::deserialize(MapAccessDeserializer::new(map))?;
+
+        Ok(MessageUserId::User(Box::new(user)))
+    }
+}
+
+impl<'de> Deserialize<'de> for MessageUserId {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        deserializer.deserialize_any(MessageUserIdVisitor)
+    }
+}
+
 #[derive(Debug, Deserialize)]
 pub struct Message {
     pub(crate) id: String,
-    pub(crate) user_id: String,
+    pub(crate) user_id: MessageUserId,
     pub(crate) webhook_id: Option<String>,
     pub(crate) to_user_id: Option<String>,
     pub(crate) channel_id: Option<String>,
@@ -30,7 +77,7 @@ impl Message {
         &self.id
     }
 
-    pub fn user_id(&self) -> &String {
+    pub fn user_id(&self) -> &MessageUserId {
         &self.user_id
     }
 
