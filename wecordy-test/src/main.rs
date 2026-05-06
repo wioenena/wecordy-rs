@@ -1,21 +1,14 @@
 use anyhow::Result;
+use std::sync::Arc;
 use std::time::Duration;
 use tracing::Level;
 use tracing_subscriber::{EnvFilter, FmtSubscriber};
-use wecordy_api::models::ApiResponse;
-use wecordy_api::models::user::User;
 use wecordy_rest::ClientBuilder;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    run().await?;
-
-    Ok(())
-}
-
-async fn run() -> Result<()> {
     let env_filter = EnvFilter::try_from_default_env()
-        .unwrap_or_else(|_| EnvFilter::new("info,wecordy_rest=debug"));
+        .unwrap_or_else(|_| EnvFilter::new("debug,wecordy_rest=debug,wecordy_ws=debug"));
 
     let subscriber = FmtSubscriber::builder()
         .with_max_level(Level::DEBUG)
@@ -23,15 +16,31 @@ async fn run() -> Result<()> {
         .finish();
     tracing::subscriber::set_global_default(subscriber)?;
 
-    let token = std::env::var("WECORDY_TOKEN")?;
-    let rest = ClientBuilder::new(token)
+    run().await?;
+
+    tokio::signal::ctrl_c().await?;
+    Ok(())
+}
+
+async fn run() -> Result<()> {
+    let token: Arc<str> = Arc::from(std::env::var("WECORDY_TOKEN")?);
+    let _rest = ClientBuilder::new(Arc::clone(&token))
         .with_timeout(Duration::from_secs(3))
         .with_base_url("https://gateway.wecordy.com/api/v1")
         .build()?;
-    let user: ApiResponse<User> = rest
-        .get(wecordy_api::routes::get_current_user().path())
-        .await?;
 
-    dbg!(user);
+    let intents: Arc<Vec<String>> = Arc::new(
+        ["Servers", "ServerMessages", "MessageContent"]
+            .iter()
+            .map(|&i| i.to_owned())
+            .collect::<Vec<String>>(),
+    );
+    let websocket = wecordy_ws::WebSocket::new(
+        Arc::clone(&token),
+        Arc::clone(&intents),
+        Arc::from(wecordy_api::constants::WS_URL),
+    );
+    websocket.connect().await?;
+
     Ok(())
 }

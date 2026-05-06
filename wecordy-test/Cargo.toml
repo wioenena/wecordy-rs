@@ -1,16 +1,17 @@
-[workspace]
-
 [package]
 name = "wecordy-test"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
-wecordy-rest = { path = "../crates/wecordy-rest" }
-wecordy-api = { path = "../crates/wecordy-api", features = ["macros"] }
+[workspace]
 
-tokio = { version = "1.52.1", features = ["full"] }
+[dependencies]
+wecordy-api = { path = "../crates/wecordy-api", features = ["macros"] }
+wecordy-rest = { path = "../crates/wecordy-rest" }
+wecordy-ws = { path = "../crates/wecordy-ws" }
+
 anyhow = "1.0.102"
 serde_json = "1.0.149"
-tracing-subscriber = { version = "0.3.23", features = ["env-filter", "fmt"] }
+tokio = { version = "1.52.1", features = ["full"] }
 tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "fmt"] }
