@@ -2,16 +2,16 @@ use reqwest::header::{self, HeaderValue};
 use std::sync::Arc;
 
 pub struct ClientBuilder {
-    token: String,
+    token: Arc<str>,
     base_url: Option<String>,
     max_retries: Option<u32>,
     timeout: Option<std::time::Duration>,
 }
 
 impl ClientBuilder {
-    pub fn new(token: impl Into<String>) -> Self {
+    pub fn new(token: Arc<str>) -> Self {
         Self {
-            token: token.into(),
+            token,
             base_url: None,
             max_retries: None,
             timeout: None,
